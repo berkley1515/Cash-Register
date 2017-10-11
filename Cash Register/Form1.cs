@@ -35,6 +35,17 @@ namespace Cash_Register
             numberOfLabel.Text = "Number of Pizza's:\n \nNumber of Fries:\n \nNumber of Drinks:";
             totalsLabelWord.Text = "Sub Total\n \nTax\n \nTotal";
             changeLabelWord.Text = "Change Due:";
+
+            //hiding things...
+            totalsLabelWord.Visible = false;
+            dividerLabel.Visible = false;
+            calculateChangeLabel.Visible = false;
+            tenderedLabel.Visible = false;
+            tenderedAmountInput.Visible = false;
+            changeLabelWord.Visible = false;
+           //testing printReceiptButton.Visible = false; 
+            newOrderButton.Visible = false;
+            
         }
 
         private void calculateTotalsLabel_Click(object sender, EventArgs e)
@@ -56,9 +67,25 @@ namespace Cash_Register
 
                 //output
                 totalsLabel.Text = totalCost.ToString("0.00") + "\n \n" + totalTax.ToString("0.00") + "\n \n" + finalTotal.ToString("0.00");//output totals
+
+                //showing labels...
+                totalsLabelWord.Visible = true;
+                dividerLabel.Visible = true;
+                calculateChangeLabel.Visible = true;
+                tenderedLabel.Visible = true;
+                tenderedAmountInput.Visible = true;
             }
             catch
             {
+                totalsLabelWord.Visible = false;
+                dividerLabel.Visible = false;
+                calculateChangeLabel.Visible = false;
+                tenderedLabel.Visible = false;
+                tenderedAmountInput.Visible = false;
+                printReceiptButton.Visible = false;
+                newOrderButton.Visible = false;
+                changeLabelWord.Visible = false;
+                changeLabel.Visible = false;
                 errorLabel.Visible = true;//"unhiding"
                 totalsLabel.Text = "";//hiding totals from possible previous calculations
                 errorLabel.Text = "You Must Enter A Valid Number, Try Again...";//outputs Error Message (if "Int16" is not recieved)
@@ -84,6 +111,10 @@ namespace Cash_Register
                 //output
                 changeLabel.Text = changeDue.ToString("0.00");//outputing change due with 2 decimal places (eg. 1.25)
 
+                //showing labels...
+                changeLabelWord.Visible = true;
+                printReceiptButton.Visible = true;
+                changeLabel.Visible = true;
             }
             catch
             {
@@ -96,6 +127,7 @@ namespace Cash_Register
 
         private void printReceiptButton_Click(object sender, EventArgs e)
         {
+            var time = 400;
             //graphics
             Graphics rG = this.CreateGraphics();
 
@@ -114,77 +146,83 @@ namespace Cash_Register
 
             rG.FillRectangle(whiteBrush, 236, 66, 223, 24);
             rG.DrawString("Boneless Pizza", receiptFont, receiptBrush, 290, 66);
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 90, 223, 24);
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 114, 223, 24);
             rG.DrawString("Order Number 15", receiptFont, receiptBrush, 245, 114);
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 138, 223, 24);
             rG.DrawString("October 15, 2017", receiptFont, receiptBrush, 245, 138);
-            Thread.Sleep(500);
+            Thread.Sleep(time);
             rG.FillRectangle(whiteBrush, 236, 162, 223, 24);
-
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 186, 223, 24);
+            rG.DrawString("Boneless Pizza", receiptFont, receiptBrush, 245, 186);
 
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 210, 223, 24);
+            rG.DrawString("Fire Fries", receiptFont, receiptBrush, 245, 210);
 
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 234, 223, 24);
+            rG.DrawString("Drink(s)", receiptFont, receiptBrush, 245, 234);
 
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 258, 223, 24);
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 282, 223, 24);
+            rG.DrawString("Subtotal", receiptFont, receiptBrush, 245, 282);
 
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 306, 223, 24);
+            rG.DrawString("Tax", receiptFont, receiptBrush, 245, 306);
 
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 330, 223, 24);
+            rG.DrawString("Total", receiptFont, receiptBrush, 245, 330);
 
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 354, 223, 24);
-
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 378, 223, 24);
+            rG.DrawString("Tendered", receiptFont, receiptBrush, 245, 378);
 
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 402, 223, 24);
+            rG.DrawString("Change Due", receiptFont, receiptBrush, 245, 402);
 
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 426, 223, 24);
-
-            Thread.Sleep(500);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 450, 223, 24);
-
-            Thread.Sleep(500);
+            rG.DrawString("Have A Nice Day!", receiptFont, receiptBrush, 290, 450);
+            Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 474, 223, 20);
 
-
+            //shwoing labels
+            newOrderButton.Visible = true;
         }
 
         private void newOrderButton_Click(object sender, EventArgs e)
         {
-
+            //
 
 
         }
