@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
+using System.Media;
 
 namespace Cash_Register
 {
@@ -29,6 +30,12 @@ namespace Cash_Register
         int totalPizza, totalFries, totalDrinks;//variables to hold value from User Input
         double totalCost, totalTax, finalTotal, tendered, changeDue;//variables to do math things with ╰( ◕ ᗜ ◕ )╯
 
+        //sound
+        SoundPlayer printSound = new SoundPlayer(Properties.Resources.printer_sound);
+
+        
+
+
         public Form1()
         {
             InitializeComponent();
@@ -41,7 +48,7 @@ namespace Cash_Register
             totalsLabelWord.Text = "Sub Total\n \nTax\n \nTotal";
             changeLabelWord.Text = "Change Due:";
 
-            //hiding things...
+            //hiding things... (ﾉಠдಠ)ﾉ︵┻━┻ (annoying)
             totalsLabelWord.Visible = false;
             dividerLabel.Visible = false;
             calculateChangeLabel.Visible = false;
@@ -144,6 +151,9 @@ namespace Cash_Register
             //time
             var time = 400;//creating a variable for the thread sleep time
 
+            //sound
+            printSound.Play();
+
             //graphics
             Graphics rG = this.CreateGraphics();
 
@@ -244,13 +254,16 @@ namespace Cash_Register
 
             rG.FillRectangle(whiteBrush, 236, 474, 223, 20);
 
+            //stopping sound
+            printSound.Stop();
+
             //showing labels
             newOrderButton.Visible = true;
         }
 
         private void newOrderButton_Click(object sender, EventArgs e)
         {
-            //hiding things
+            //hiding things... ⊂(▀¯▀⊂)
             printReceiptButton.Visible = false;
             totalsLabel.Visible = false;
             totalsLabelWord.Visible = false;
@@ -269,8 +282,9 @@ namespace Cash_Register
             tenderedAmountInput.Text = String.Empty;
 
             //refresh
-            this.Refresh();//refreshing to clear graphics
+            this.Refresh();//refreshing to clear graphics    _|___|_ ╰(º o º╰)
 
+            //IM DONE ┏(-_-)┓┏(-_-)┛┗(-_-﻿ )┓ woot 
         }
     }
 }
