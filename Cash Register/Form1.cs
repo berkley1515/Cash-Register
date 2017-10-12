@@ -11,6 +11,11 @@ using System.Threading;
 
 namespace Cash_Register
 {
+    ///Berkley Fair
+    ///October 12th, 2017
+    ///Programmed to run a "Cash Register" for a fast food resturant named Boneless Pizza,
+    ///***Important*** In order to use program properly and efficiently, use the tab button instead of clicking the buttons
+
     public partial class Form1 : Form
     {
         //globals
@@ -43,7 +48,7 @@ namespace Cash_Register
             tenderedLabel.Visible = false;
             tenderedAmountInput.Visible = false;
             changeLabelWord.Visible = false;
-           //testing printReceiptButton.Visible = false; 
+            printReceiptButton.Visible = false; 
             newOrderButton.Visible = false;
             
         }
@@ -69,6 +74,7 @@ namespace Cash_Register
                 totalsLabel.Text = totalCost.ToString("0.00") + "\n \n" + totalTax.ToString("0.00") + "\n \n" + finalTotal.ToString("0.00");//output totals
 
                 //showing labels...
+                totalsLabel.Visible = true;
                 totalsLabelWord.Visible = true;
                 dividerLabel.Visible = true;
                 calculateChangeLabel.Visible = true;
@@ -77,6 +83,9 @@ namespace Cash_Register
             }
             catch
             {
+                //hiding labels... 
+                changeErrorLabel.Visible = false;
+                totalsLabel.Visible = false;
                 totalsLabelWord.Visible = false;
                 dividerLabel.Visible = false;
                 calculateChangeLabel.Visible = false;
@@ -86,10 +95,11 @@ namespace Cash_Register
                 newOrderButton.Visible = false;
                 changeLabelWord.Visible = false;
                 changeLabel.Visible = false;
-                errorLabel.Visible = true;//"unhiding"
+
+                //outputing error
+                errorLabel.Visible = true;//"unhiding" error label
                 totalsLabel.Text = "";//hiding totals from possible previous calculations
                 errorLabel.Text = "You Must Enter A Valid Number, Try Again...";//outputs Error Message (if "Int16" is not recieved)
-                return;
             }
             
 
@@ -118,61 +128,71 @@ namespace Cash_Register
             }
             catch
             {
-                changeErrorLabel.Visible = true;//"unhiding"
+                //hiding things...
+                printReceiptButton.Visible = false;
+                newOrderButton.Visible = false;
+
+                //outputing error 
+                changeErrorLabel.Visible = true;//"unhiding" error label
                 changeLabel.Text = "";//hiding totals from possible previous calculations
                 changeErrorLabel.Text = "You Must Enter A Valid\nNumber, Try Again...";//outputs Error Message (if "Int16" is not recieved)
-                return;
             }
         }
 
         private void printReceiptButton_Click(object sender, EventArgs e)
         {
-            var time = 400;
+            //time
+            var time = 400;//creating a variable for the thread sleep time
+
             //graphics
             Graphics rG = this.CreateGraphics();
 
             //brushes and fonts
-            Pen borderPen = new Pen(Color.Salmon, 2);
-            SolidBrush backBrush = new SolidBrush(Color.LightSalmon);
-            SolidBrush whiteBrush = new SolidBrush(Color.White);
+            Pen borderPen = new Pen(Color.Salmon, 2);//salmon pen for receipt border
+            SolidBrush backBrush = new SolidBrush(Color.LightSalmon);//light salmon brush for receipt background
+            SolidBrush whiteBrush = new SolidBrush(Color.White);//white brush for receipt drawing over background
 
-            Font receiptFont = new Font("Consolas", 10, FontStyle.Regular);
-            SolidBrush receiptBrush = new SolidBrush(Color.Black);
+            Font receiptFont = new Font("Consolas", 10, FontStyle.Regular);//font for receipt text
+            SolidBrush receiptBrush = new SolidBrush(Color.Black);//brush for receipt font
 
-            //drawing
-            rG.FillRectangle(backBrush, 235, 65, 225, 430);
-            rG.DrawRectangle(borderPen, 235, 65, 225, 430);
+            //drawing receipt
+            rG.FillRectangle(backBrush, 235, 65, 225, 430);//filling receipt background
+            rG.DrawRectangle(borderPen, 235, 65, 225, 430);//drawing border for receipt
             Thread.Sleep(500);
 
             rG.FillRectangle(whiteBrush, 236, 66, 223, 24);
-            rG.DrawString("Boneless Pizza", receiptFont, receiptBrush, 290, 66);
+            rG.DrawString("Boneless Pizza", receiptFont, receiptBrush, 290, 66);//tile of receipt
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 90, 223, 24);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 114, 223, 24);
-            rG.DrawString("Order Number 15", receiptFont, receiptBrush, 245, 114);
+            rG.DrawString("Order Number 15", receiptFont, receiptBrush, 245, 114);//order number
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 138, 223, 24);
-            rG.DrawString("October 15, 2017", receiptFont, receiptBrush, 245, 138);
+            rG.DrawString("October 15, 2017", receiptFont, receiptBrush, 245, 138);//date
             Thread.Sleep(time);
+
             rG.FillRectangle(whiteBrush, 236, 162, 223, 24);
             Thread.Sleep(time);
 
+            //pizza
             rG.FillRectangle(whiteBrush, 236, 186, 223, 24);
             rG.DrawString("Boneless Pizza", receiptFont, receiptBrush, 245, 186);
             rG.DrawString("x" + totalPizza, receiptFont, receiptBrush, 365, 186);
             rG.DrawString("@ $" + PIZZA_PRICE, receiptFont, receiptBrush, 390, 186);
             Thread.Sleep(time);
 
+            //fries
             rG.FillRectangle(whiteBrush, 236, 210, 223, 24);
             rG.DrawString("Fire Fries", receiptFont, receiptBrush, 245, 210);
             rG.DrawString("x" + totalFries, receiptFont, receiptBrush, 365, 210);
             rG.DrawString("@ $" + FRIES_PRICE, receiptFont, receiptBrush, 390, 210);
             Thread.Sleep(time);
 
+            //drink(s)
             rG.FillRectangle(whiteBrush, 236, 234, 223, 24);
             rG.DrawString("Drink(s)", receiptFont, receiptBrush, 245, 234);
             rG.DrawString("x" + totalDrinks, receiptFont, receiptBrush, 365, 234);
@@ -182,16 +202,19 @@ namespace Cash_Register
             rG.FillRectangle(whiteBrush, 236, 258, 223, 24);
             Thread.Sleep(time);
 
+            //sub total
             rG.FillRectangle(whiteBrush, 236, 282, 223, 24);
             rG.DrawString("Subtotal", receiptFont, receiptBrush, 245, 282);
             rG.DrawString(totalCost.ToString("C"), receiptFont, receiptBrush, 390, 282);
             Thread.Sleep(time);
 
+            //tax total
             rG.FillRectangle(whiteBrush, 236, 306, 223, 24);
             rG.DrawString("Tax", receiptFont, receiptBrush, 245, 306);
             rG.DrawString(totalTax.ToString("C"), receiptFont, receiptBrush, 390, 306);
             Thread.Sleep(time);
 
+            //final total
             rG.FillRectangle(whiteBrush, 236, 330, 223, 24);
             rG.DrawString("Total", receiptFont, receiptBrush, 245, 330);
             rG.DrawString(finalTotal.ToString("C"), receiptFont, receiptBrush, 390, 330);
@@ -200,11 +223,13 @@ namespace Cash_Register
             rG.FillRectangle(whiteBrush, 236, 354, 223, 24);
             Thread.Sleep(time);
 
+            //cash tendered
             rG.FillRectangle(whiteBrush, 236, 378, 223, 24);
             rG.DrawString("Tendered", receiptFont, receiptBrush, 245, 378);
             rG.DrawString(tendered.ToString("C"), receiptFont, receiptBrush, 390, 378);
             Thread.Sleep(time);
 
+            //change due back to customer
             rG.FillRectangle(whiteBrush, 236, 402, 223, 24);
             rG.DrawString("Change Due", receiptFont, receiptBrush, 245, 402);
             rG.DrawString(changeDue.ToString("C"), receiptFont, receiptBrush, 390, 402);
@@ -214,19 +239,37 @@ namespace Cash_Register
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 450, 223, 24);
-            rG.DrawString("Have A Nice Day!", receiptFont, receiptBrush, 290, 450);
+            rG.DrawString("Have A Nice Day!", receiptFont, receiptBrush, 290, 450);//nice message to end receipt
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 474, 223, 20);
 
-            //shwoing labels
+            //showing labels
             newOrderButton.Visible = true;
         }
 
         private void newOrderButton_Click(object sender, EventArgs e)
         {
-            //
+            //hiding things
+            printReceiptButton.Visible = false;
+            totalsLabel.Visible = false;
+            totalsLabelWord.Visible = false;
+            dividerLabel.Visible = false;
+            calculateChangeLabel.Visible = false;
+            tenderedLabel.Visible = false;
+            tenderedAmountInput.Visible = false;
+            newOrderButton.Visible = false;
+            changeLabelWord.Visible = false;
+            changeLabel.Visible = false;
 
+            //emptying things...
+            pizzaAmountInput.Text = String.Empty;
+            friesAmountInput.Text = String.Empty;
+            drinksAmountInput.Text = String.Empty;
+            tenderedAmountInput.Text = String.Empty;
+
+            //refresh
+            this.Refresh();//refreshing to clear graphics
 
         }
     }

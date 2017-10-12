@@ -74,6 +74,7 @@
             this.newOrderButton.Text = "New Order";
             this.newOrderButton.UseVisualStyleBackColor = true;
             this.newOrderButton.Click += new System.EventHandler(this.newOrderButton_Click);
+            this.newOrderButton.Enter += new System.EventHandler(this.newOrderButton_Click);
             // 
             // calculateTotalsLabel
             // 
@@ -118,6 +119,7 @@
             this.printReceiptButton.Text = "Print Receipt";
             this.printReceiptButton.UseVisualStyleBackColor = true;
             this.printReceiptButton.Click += new System.EventHandler(this.printReceiptButton_Click);
+            this.printReceiptButton.Enter += new System.EventHandler(this.printReceiptButton_Click);
             // 
             // numberOfLabel
             // 
