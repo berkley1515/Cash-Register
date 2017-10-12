@@ -163,17 +163,20 @@ namespace Cash_Register
 
             rG.FillRectangle(whiteBrush, 236, 186, 223, 24);
             rG.DrawString("Boneless Pizza", receiptFont, receiptBrush, 245, 186);
-
+            rG.DrawString("x" + totalPizza, receiptFont, receiptBrush, 365, 186);
+            rG.DrawString("@ $" + PIZZA_PRICE, receiptFont, receiptBrush, 390, 186);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 210, 223, 24);
             rG.DrawString("Fire Fries", receiptFont, receiptBrush, 245, 210);
-
+            rG.DrawString("x" + totalFries, receiptFont, receiptBrush, 365, 210);
+            rG.DrawString("@ $" + FRIES_PRICE, receiptFont, receiptBrush, 390, 210);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 234, 223, 24);
             rG.DrawString("Drink(s)", receiptFont, receiptBrush, 245, 234);
-
+            rG.DrawString("x" + totalDrinks, receiptFont, receiptBrush, 365, 234);
+            rG.DrawString("@ $" + DRINK_PRICE, receiptFont, receiptBrush, 390, 234);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 258, 223, 24);
@@ -181,17 +184,17 @@ namespace Cash_Register
 
             rG.FillRectangle(whiteBrush, 236, 282, 223, 24);
             rG.DrawString("Subtotal", receiptFont, receiptBrush, 245, 282);
-
+            rG.DrawString(totalCost.ToString("C"), receiptFont, receiptBrush, 390, 282);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 306, 223, 24);
             rG.DrawString("Tax", receiptFont, receiptBrush, 245, 306);
-
+            rG.DrawString(totalTax.ToString("C"), receiptFont, receiptBrush, 390, 306);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 330, 223, 24);
             rG.DrawString("Total", receiptFont, receiptBrush, 245, 330);
-
+            rG.DrawString(finalTotal.ToString("C"), receiptFont, receiptBrush, 390, 330);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 354, 223, 24);
@@ -199,12 +202,12 @@ namespace Cash_Register
 
             rG.FillRectangle(whiteBrush, 236, 378, 223, 24);
             rG.DrawString("Tendered", receiptFont, receiptBrush, 245, 378);
-
+            rG.DrawString(tendered.ToString("C"), receiptFont, receiptBrush, 390, 378);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 402, 223, 24);
             rG.DrawString("Change Due", receiptFont, receiptBrush, 245, 402);
-
+            rG.DrawString(changeDue.ToString("C"), receiptFont, receiptBrush, 390, 402);
             Thread.Sleep(time);
 
             rG.FillRectangle(whiteBrush, 236, 426, 223, 24);
