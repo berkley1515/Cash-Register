@@ -31,10 +31,7 @@ namespace Cash_Register
         double totalCost, totalTax, finalTotal, tendered, changeDue;//variables to do math things with ╰( ◕ ᗜ ◕ )╯
 
         //sound
-        SoundPlayer printSound = new SoundPlayer(Properties.Resources.printer_sound);
-
-        
-
+        SoundPlayer printSound = new SoundPlayer(Properties.Resources.printer_sound);//sound player for receipt ♪ヽ( ⌒o⌒)人(⌒-⌒ )v ♪
 
         public Form1()
         {
@@ -72,7 +69,7 @@ namespace Cash_Register
                 totalFries = Convert.ToInt16(friesAmountInput.Text);//holding value for Fries
                 totalDrinks = Convert.ToInt16(drinksAmountInput.Text);//holding value for Drinks
 
-                //calculations
+                //calculations 
                 totalCost = (totalPizza * PIZZA_PRICE) + (totalFries * FRIES_PRICE) + (totalDrinks * DRINK_PRICE);//multiplying values of options and adding them together
                 totalTax = totalCost * TAX_RATE;//multipying the Sub Total by the Tax Rate
                 finalTotal = totalCost + totalTax;//adding Sub Total and Tax to creat a final Cost
@@ -90,7 +87,7 @@ namespace Cash_Register
             }
             catch
             {
-                //hiding labels... 
+                //hiding labels...  
                 changeErrorLabel.Visible = false;
                 totalsLabel.Visible = false;
                 totalsLabelWord.Visible = false;
@@ -125,17 +122,35 @@ namespace Cash_Register
                 //calculations
                 changeDue = tendered - finalTotal;//calculating amount of change due to customer
 
-                //output
-                changeLabel.Text = changeDue.ToString("0.00");//outputing change due with 2 decimal places (eg. 1.25)
+                if (changeDue < 0)
+                {
+                    //outputing error
+                    changeErrorLabel.Visible = true;//"unhiding" error label
+                    changeLabel.Text = "";//hiding totals from possible previous calculations
+                    changeErrorLabel.Text = "ERROR! Not Enough Money\nFrom Customer...";//outputs Error Message (if "Int16" is not recieved)
 
-                //showing labels...
-                changeLabelWord.Visible = true;
-                printReceiptButton.Visible = true;
-                changeLabel.Visible = true;
+                    //hinding labels
+                    printReceiptButton.Visible = false;
+                    newOrderButton.Visible = false;
+
+                    this.Refresh();
+                }
+                else
+                {
+                    //output
+                    changeLabel.Text = changeDue.ToString("0.00");//outputing change due with 2 decimal places (eg. 1.25)
+
+                    //showing labels...
+                    changeLabelWord.Visible = true;
+                    printReceiptButton.Visible = true;
+                    changeLabel.Visible = true;
+                    
+                }
+                
             }
             catch
             {
-                //hiding things...
+                //hiding things... ༼ つ ▀̿_▀̿ ༽つ
                 printReceiptButton.Visible = false;
                 newOrderButton.Visible = false;
 
@@ -152,10 +167,10 @@ namespace Cash_Register
             var time = 400;//creating a variable for the thread sleep time
 
             //sound
-            printSound.Play();
+            printSound.Play(); //  ┐(・。・┐) ♪
 
             //graphics
-            Graphics rG = this.CreateGraphics();
+            Graphics rG = this.CreateGraphics();//graphics (AKA. Black Magic!)  (ﾉ◕ヮ◕)⊃━☆*:･ﾟ.* ･｡ﾟ✧
 
             //brushes and fonts
             Pen borderPen = new Pen(Color.Salmon, 2);//salmon pen for receipt border
@@ -255,7 +270,7 @@ namespace Cash_Register
             rG.FillRectangle(whiteBrush, 236, 474, 223, 20);
 
             //stopping sound
-            printSound.Stop();
+            printSound.Stop();// ヽ(⌐■_■)ノ♪♬
 
             //showing labels
             newOrderButton.Visible = true;
