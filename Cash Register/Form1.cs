@@ -122,7 +122,7 @@ namespace Cash_Register
                 //calculations
                 changeDue = tendered - finalTotal;//calculating amount of change due to customer
 
-                if (changeDue < 0)
+                if (changeDue < 0)//if change due is negative, then...
                 {
                     //outputing error
                     changeErrorLabel.Visible = true;//"unhiding" error label
@@ -133,7 +133,7 @@ namespace Cash_Register
                     printReceiptButton.Visible = false;
                     newOrderButton.Visible = false;
 
-                    this.Refresh();
+                    this.Refresh();//refreshing to clear receipt if shown
                 }
                 else
                 {
@@ -145,8 +145,7 @@ namespace Cash_Register
                     printReceiptButton.Visible = true;
                     changeLabel.Visible = true;
                     
-                }
-                
+                }                
             }
             catch
             {
@@ -167,7 +166,7 @@ namespace Cash_Register
             var time = 400;//creating a variable for the thread sleep time
 
             //sound
-            printSound.Play(); //  ┐(・。・┐) ♪
+            printSound.Play(); //playing receipt sound  ┐(・。・┐) ♪
 
             //graphics
             Graphics rG = this.CreateGraphics();//graphics (AKA. Black Magic!)  (ﾉ◕ヮ◕)⊃━☆*:･ﾟ.* ･｡ﾟ✧
